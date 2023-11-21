@@ -1,24 +1,30 @@
 import styles from "@/app/ui/dashboard/products/singleProduct/singleProduct.module.css"
 import Image from "next/image"
-const SingleProductPage = () => {
+import {fetchProduct} from "@/app/lib/data";
+import {useRouter} from "next/navigation";
+import {updateProduct} from "@/app/lib/actions";
+// @ts-ignore
+const SingleProductPage = async ({params}) => {
+  const detail = await fetchProduct(params.id)
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           <Image src='/noavatar.jpg' alt="" width={300} height={300} className={styles.imgContainerImage}></Image>
         </div>
-        John Doe
+        {detail.title}
       </div>
       <div className={styles.formContainer}>
-        <form action="" className={styles.form}>
+        <form action={updateProduct} className={styles.form}>
+          <input type="hidden" name="id" value={detail.id}/>
           <label>Title</label>
-          <input type="text" name="title" placeholder="title"/>
+          <input type="text" name="title" placeholder={detail.title}/>
           
           <label>Desc</label>
-          <input type="desc" name="desc" placeholder="desc"/>
+          <input type="desc" name="desc" placeholder={detail.desc}/>
           
           <label>Price</label>
-          <input type="numnber" name="price" placeholder="price"/>
+          <input type="numnber" name="price" placeholder={detail.price}/>
           
           <label>Phone</label>
           <input type="number" name="phone" placeholder="phone"/>

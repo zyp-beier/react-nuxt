@@ -22,9 +22,16 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
-  phone: {
-    type: String,
+  isActive: {
+    type: Boolean,
+    default: true
   },
+  phone: {
+    type: Number,
+  },
+  address: {
+    type: String
+  }
   
 },
   {timeseries: true}
@@ -45,6 +52,15 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
     min: 0,
+  },
+  size: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  color: {
+    type: String,
+    required: true,
   },
 }, {timeseries: true})
 
